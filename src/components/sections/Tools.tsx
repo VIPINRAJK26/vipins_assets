@@ -10,7 +10,7 @@ const CLUSTERS = [
   {
     label: "Core",
     level: 91,
-    items: ["Node", "Edge functions", "REST / tRPC", "Auth & RBAC", "Queues"],
+    items: ["Python", "FastAPi", "RESTful APIs", "Authentication", "Django"],
   },
   {
     label: "Data",

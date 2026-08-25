@@ -3,7 +3,7 @@ import { ArrowDownRight, Cpu, Sparkles } from "lucide-react";
 import avatar from "@/assets/hero-avatar.png";
 import orb from "@/assets/orb.png";
 
-const ROLES = ["scalable web apps", "commerce engines", "realtime dashboards", "CRM platforms"];
+const ROLES = ["scalable web apps", "e-commerce","portfolios", "dashboards", "CRM platforms"];
 
 export function Hero() {
   const [typed, setTyped] = useState("");
@@ -60,10 +60,10 @@ export function Hero() {
       <div className="relative mx-auto max-w-7xl px-5 md:px-8">
         <div className="grid items-center gap-10 md:grid-cols-[1.05fr_0.95fr] md:gap-14">
           <div>
-            <div className="glass-panel clip-hud mb-6 inline-flex items-center gap-2 px-3 py-1.5">
+            {/* <div className="glass-panel clip-hud mb-6 inline-flex items-center gap-2 px-3 py-1.5">
               <span className="h-1.5 w-1.5 animate-pulse-glow rounded-full bg-primary" />
               <span className="mono-label !tracking-[0.2em]">available · node_0x2050</span>
-            </div>
+            </div> */}
 
             <h1 className="font-display text-[2.6rem] leading-[1.02] font-bold tracking-tight sm:text-6xl lg:text-7xl">
               I engineer
