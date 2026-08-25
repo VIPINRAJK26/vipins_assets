@@ -84,7 +84,7 @@ export function Works() {
             <h2 className="max-w-xl font-display text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">
               Selected <span className="text-neon-gradient">systems</span> in production
             </h2>
-            <p className="font-mono text-xs text-muted-foreground">04 of 20+ records shown</p>
+            <p className="font-mono text-xs text-muted-foreground">06 of 20+ records shown</p>
           </div>
         </Reveal>
 
