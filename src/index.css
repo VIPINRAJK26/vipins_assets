@@ -1,0 +1,349 @@
+@import "tailwindcss";
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * NEXUS 2050 — futuristic design system.
+ * All colors are oklch tokens. Never hardcode colors in components.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+
+  --font-display: "Chakra Petch", "Space Grotesk", sans-serif;
+  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+
+  --color-neon: var(--neon);
+  --color-neon-2: var(--neon-2);
+  --color-neon-3: var(--neon-3);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-glass: var(--glass);
+  --color-grid: var(--grid);
+}
+
+:root {
+  --radius: 0.25rem;
+
+  /* light — "daylight lab" */
+  --background: oklch(0.975 0.008 240);
+  --foreground: oklch(0.19 0.035 265);
+  --card: oklch(0.995 0.004 240);
+  --card-foreground: oklch(0.19 0.035 265);
+  --popover: oklch(0.995 0.004 240);
+  --popover-foreground: oklch(0.19 0.035 265);
+  --primary: oklch(0.55 0.19 245);
+  --primary-foreground: oklch(0.99 0.005 240);
+  --secondary: oklch(0.93 0.015 250);
+  --secondary-foreground: oklch(0.25 0.04 265);
+  --muted: oklch(0.94 0.012 250);
+  --muted-foreground: oklch(0.48 0.03 260);
+  --accent: oklch(0.6 0.24 320);
+  --accent-foreground: oklch(0.99 0.005 240);
+  --destructive: oklch(0.58 0.24 25);
+  --destructive-foreground: oklch(0.99 0.005 240);
+  --border: oklch(0.87 0.02 250);
+  --input: oklch(0.9 0.02 250);
+  --ring: oklch(0.55 0.19 245);
+
+  --neon: oklch(0.62 0.17 232);
+  --neon-2: oklch(0.6 0.25 322);
+  --neon-3: oklch(0.68 0.16 165);
+  --surface: oklch(0.99 0.004 240);
+  --surface-2: oklch(0.955 0.01 245);
+  --glass: oklch(1 0 0 / 55%);
+  --grid: oklch(0.55 0.19 245 / 10%);
+
+  --gradient-neon: linear-gradient(115deg, var(--neon), var(--neon-2) 55%, var(--neon-3));
+  --gradient-veil: radial-gradient(
+    ellipse 90% 60% at 50% -10%,
+    color-mix(in oklab, var(--neon) 22%, transparent),
+    transparent 70%
+  );
+  --glow-sm: 0 0 0 1px color-mix(in oklab, var(--neon) 26%, transparent),
+    0 8px 30px -12px color-mix(in oklab, var(--neon) 40%, transparent);
+  --glow-lg: 0 0 40px -6px color-mix(in oklab, var(--neon) 45%, transparent),
+    0 0 90px -20px color-mix(in oklab, var(--neon-2) 45%, transparent);
+  --shadow-panel: 0 24px 70px -30px color-mix(in oklab, var(--foreground) 40%, transparent);
+}
+
+.dark {
+  /* dark — "deep space terminal" */
+  --background: oklch(0.145 0.03 265);
+  --foreground: oklch(0.96 0.008 250);
+  --card: oklch(0.19 0.035 265);
+  --card-foreground: oklch(0.96 0.008 250);
+  --popover: oklch(0.19 0.035 265);
+  --popover-foreground: oklch(0.96 0.008 250);
+  --primary: oklch(0.78 0.16 195);
+  --primary-foreground: oklch(0.14 0.03 265);
+  --secondary: oklch(0.25 0.04 265);
+  --secondary-foreground: oklch(0.96 0.008 250);
+  --muted: oklch(0.24 0.035 265);
+  --muted-foreground: oklch(0.7 0.03 255);
+  --accent: oklch(0.72 0.23 330);
+  --accent-foreground: oklch(0.14 0.03 265);
+  --destructive: oklch(0.68 0.2 22);
+  --destructive-foreground: oklch(0.14 0.03 265);
+  --border: oklch(0.82 0.12 220 / 18%);
+  --input: oklch(0.82 0.12 220 / 22%);
+  --ring: oklch(0.78 0.16 195);
+
+  --neon: oklch(0.82 0.15 195);
+  --neon-2: oklch(0.72 0.23 330);
+  --neon-3: oklch(0.85 0.18 150);
+  --surface: oklch(0.19 0.035 265 / 80%);
+  --surface-2: oklch(0.22 0.04 265);
+  --glass: oklch(0.22 0.04 265 / 55%);
+  --grid: oklch(0.82 0.15 195 / 12%);
+
+  --gradient-veil: radial-gradient(
+    ellipse 90% 60% at 50% -10%,
+    color-mix(in oklab, var(--neon) 26%, transparent),
+    transparent 70%
+  );
+  --shadow-panel: 0 24px 70px -30px oklch(0 0 0 / 70%);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--neon) 40%, transparent);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
+}
+
+/* ---------- utilities ---------- */
+
+@utility text-neon-gradient {
+  background-image: var(--gradient-neon);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility bg-veil {
+  background-image: var(--gradient-veil);
+}
+
+@utility glass-panel {
+  background-color: var(--glass);
+  backdrop-filter: blur(14px) saturate(140%);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-panel);
+}
+
+@utility glow-ring {
+  box-shadow: var(--glow-sm);
+}
+
+@utility glow-aura {
+  box-shadow: var(--glow-lg);
+}
+
+@utility grid-floor {
+  background-image:
+    linear-gradient(to right, var(--grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+@utility scanlines {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      to bottom,
+      transparent 0 3px,
+      color-mix(in oklab, var(--neon) 7%, transparent) 3px 4px
+    );
+    mix-blend-mode: overlay;
+  }
+}
+
+@utility clip-hud {
+  clip-path: polygon(0 12px, 12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%);
+}
+
+@utility mono-label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+/* ---------- animations ---------- */
+
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-18px);
+  }
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+}
+
+@keyframes sweep {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(220%);
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes flicker {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  45% {
+    opacity: 0.55;
+  }
+  55% {
+    opacity: 0.9;
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@utility animate-float {
+  animation: float-y 7s ease-in-out infinite;
+}
+
+@utility animate-spin-slow {
+  animation: spin-slow 26s linear infinite;
+}
+
+@utility animate-pulse-glow {
+  animation: pulse-glow 4.5s ease-in-out infinite;
+}
+
+@utility animate-sweep {
+  animation: sweep 3.4s ease-in-out infinite;
+}
+
+@utility animate-marquee {
+  animation: marquee 28s linear infinite;
+}
+
+@utility animate-flicker {
+  animation: flicker 3s steps(2, end) infinite;
+}
+
+@utility reveal {
+  opacity: 0;
+  &[data-visible="true"] {
+    animation: rise-in 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+  }
+}
+
+/* ---------- developer cursor ---------- */
+
+@media (hover: hover) and (pointer: fine) {
+  .cursor-dev,
+  .cursor-dev * {
+    cursor: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::after,
+  *::before {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
