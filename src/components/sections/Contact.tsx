@@ -21,7 +21,7 @@ export function Contact() {
         "w-full border border-border bg-surface-2/60 px-4 py-3.5 font-mono text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-primary";
 
     return (
-        <section id="contact" className="relative overflow-hidden py-20 md:py-32">
+        <section id="contact" className="relative overflow-hidden py-10 md:py-32">
             <div className="bg-veil absolute inset-x-0 bottom-0 top-1/4 rotate-180" />
 
             <div className="relative mx-auto max-w-7xl px-5 md:px-8">

@@ -27,7 +27,7 @@ const TRAITS = [
 
 export function About() {
   return (
-    <section id="about" className="relative overflow-hidden py-20 md:py-32">
+    <section id="about" className="relative overflow-hidden py-10 md:py-32">
       <div className="pointer-events-none absolute left-1/2 top-0 h-px w-2/3 -translate-x-1/2 bg-primary/40" />
 
       <div className="mx-auto max-w-7xl px-5 md:px-8">
