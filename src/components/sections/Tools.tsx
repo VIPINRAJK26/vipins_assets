@@ -26,7 +26,7 @@ const CLUSTERS = [
 
 export function Tools() {
   return (
-    <section id="tools" className="relative overflow-hidden py-20 md:py-32">
+    <section id="tools" className="relative overflow-hidden py-10 md:py-32">
       <div className="grid-floor absolute inset-0 opacity-50" />
       <img
         src={orb}
