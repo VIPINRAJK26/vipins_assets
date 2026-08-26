@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from "react";
+import { createContext, useCallback, useEffect, useState, type ReactNode } from "react";
 
 type Theme = "dark" | "light";
 
@@ -9,13 +9,15 @@ const ThemeContext = createContext<{ theme: Theme; toggle: () => void }>({
 
 const STORAGE_KEY = "nexus-theme";
 
-export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>("dark");
+// Exported so use-theme.ts can consume it without re-exporting it from here.
+export { ThemeContext };
 
-  useEffect(() => {
+export function ThemeProvider({ children }: { children: ReactNode }) {
+  // Lazy initializer reads localStorage once at construction — no effect needed.
+  const [theme, setTheme] = useState<Theme>(() => {
     const stored = window.localStorage.getItem(STORAGE_KEY);
-    if (stored === "light" || stored === "dark") setTheme(stored);
-  }, []);
+    return stored === "light" || stored === "dark" ? stored : "dark";
+  });
 
   useEffect(() => {
     const root = document.documentElement;
@@ -29,4 +31,3 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   return <ThemeContext.Provider value={{ theme, toggle }}>{children}</ThemeContext.Provider>;
 }
 
-export const useTheme = () => useContext(ThemeContext);

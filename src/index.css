@@ -85,11 +85,9 @@
   --grid: oklch(0.55 0.19 245 / 10%);
 
   --gradient-neon: linear-gradient(115deg, var(--neon), var(--neon-2) 55%, var(--neon-3));
-  --gradient-veil: radial-gradient(
-    ellipse 90% 60% at 50% -10%,
-    color-mix(in oklab, var(--neon) 22%, transparent),
-    transparent 70%
-  );
+  --gradient-veil: radial-gradient(ellipse 90% 60% at 50% -10%,
+      color-mix(in oklab, var(--neon) 22%, transparent),
+      transparent 70%);
   --glow-sm: 0 0 0 1px color-mix(in oklab, var(--neon) 26%, transparent),
     0 8px 30px -12px color-mix(in oklab, var(--neon) 40%, transparent);
   --glow-lg: 0 0 40px -6px color-mix(in oklab, var(--neon) 45%, transparent),
@@ -127,16 +125,18 @@
   --glass: oklch(0.22 0.04 265 / 55%);
   --grid: oklch(0.82 0.15 195 / 12%);
 
-  --gradient-veil: radial-gradient(
-    ellipse 90% 60% at 50% -10%,
-    color-mix(in oklab, var(--neon) 26%, transparent),
-    transparent 70%
-  );
+  --gradient-veil: radial-gradient(ellipse 90% 60% at 50% -10%,
+      color-mix(in oklab, var(--neon) 26%, transparent),
+      transparent 70%);
   --shadow-panel: 0 24px 70px -30px oklch(0 0 0 / 70%);
 }
 
 @layer base {
-  * {
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
     border-color: var(--color-border);
   }
 
@@ -148,7 +148,9 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
-    overflow-x: hidden;
+    /* clip (not hidden): prevents horizontal scroll without creating a scroll
+       container, so position:sticky on descendants (Nav) keeps working. */
+    overflow-x: clip;
   }
 
   ::selection {
@@ -201,16 +203,15 @@
 
 @utility scanlines {
   position: relative;
+
   &::after {
     content: "";
     position: absolute;
     inset: 0;
     pointer-events: none;
-    background: repeating-linear-gradient(
-      to bottom,
-      transparent 0 3px,
-      color-mix(in oklab, var(--neon) 7%, transparent) 3px 4px
-    );
+    background: repeating-linear-gradient(to bottom,
+        transparent 0 3px,
+        color-mix(in oklab, var(--neon) 7%, transparent) 3px 4px);
     mix-blend-mode: overlay;
   }
 }
@@ -230,10 +231,12 @@
 /* ---------- animations ---------- */
 
 @keyframes float-y {
+
   0%,
   100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-18px);
   }
@@ -246,11 +249,13 @@
 }
 
 @keyframes pulse-glow {
+
   0%,
   100% {
     opacity: 0.55;
     transform: scale(1);
   }
+
   50% {
     opacity: 1;
     transform: scale(1.06);
@@ -261,6 +266,7 @@
   0% {
     transform: translateX(-120%);
   }
+
   100% {
     transform: translateX(220%);
   }
@@ -270,19 +276,23 @@
   from {
     transform: translateX(0);
   }
+
   to {
     transform: translateX(-50%);
   }
 }
 
 @keyframes flicker {
+
   0%,
   100% {
     opacity: 1;
   }
+
   45% {
     opacity: 0.55;
   }
+
   55% {
     opacity: 0.9;
   }
@@ -293,6 +303,7 @@
     opacity: 0;
     transform: translateY(28px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -325,6 +336,7 @@
 
 @utility reveal {
   opacity: 0;
+
   &[data-visible="true"] {
     animation: rise-in 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
   }
@@ -333,6 +345,7 @@
 /* ---------- developer cursor ---------- */
 
 @media (hover: hover) and (pointer: fine) {
+
   .cursor-dev,
   .cursor-dev * {
     cursor: none !important;
@@ -340,6 +353,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::after,
   *::before {

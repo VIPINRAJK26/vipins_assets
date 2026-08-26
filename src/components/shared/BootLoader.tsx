@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 const LINES = [
-  "$ init nexus.runtime --year 2050",
+  "$ init vipin.dev --year 2026",
   "> mounting neural interface ......... ok",
   "> compiling 20+ shipped systems ..... ok",
   "> linking commerce / crm / dashboards",

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Mail, Send } from "lucide-react";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
+
 
 import { Reveal } from "../animation/Reveal";
 
@@ -41,7 +41,6 @@ export function Contact() {
                                 { icon: Mail, label: "hello@vipinraj.in", href: "mailto:hello@vipinraj.in" },
                                 { icon: FaGithub, label: "github.com/VIPINRAJK26", href: "#" },
                                 { icon: FaLinkedin, label: "linkedin.com/in/vipinraj26", href: "#" },
-                                { icon: FaXTwitter, label: "@vipinraj0271", href: "#" },
                             ].map((c) => (
                                 <a
                                     key={c.label}

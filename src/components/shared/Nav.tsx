@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Menu, MoonStar, SunMedium, X } from "lucide-react";
-import { useTheme } from "../themes/theme-provider";
+import { useTheme } from "../themes/use-theme";
 
 const LINKS = [
   { id: "hero", label: "Index" },
@@ -41,8 +41,7 @@ export function Nav() {
       <header className="fixed inset-x-0 top-0 z-50 md:hidden">
         <div className="glass-panel flex items-center justify-between px-4 py-3">
           <button onClick={() => go("hero")} className="font-mono text-sm font-bold tracking-widest">
-            <span className="text-neon-gradient">NX</span>
-            <span className="text-muted-foreground">/2050</span>
+            <span className="text-neon-gradient">VIPIN</span>
           </button>
           <div className="flex items-center gap-2">
             <ThemeButton theme={theme} toggle={toggle} />

@@ -7,13 +7,15 @@ import { useEffect, useRef, useState } from "react";
 export function DevCursor() {
   const dot = useRef<HTMLDivElement>(null);
   const ring = useRef<HTMLDivElement>(null);
-  const [enabled, setEnabled] = useState(false);
+  // Evaluate the media query once at construction — no effect needed for the initial value.
+  const [enabled] = useState(
+    () => window.matchMedia("(hover: hover) and (pointer: fine)").matches,
+  );
   const [hot, setHot] = useState(false);
   const [coords, setCoords] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
-    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
-    setEnabled(true);
+    if (!enabled) return;
     document.documentElement.classList.add("cursor-dev");
 
     let rx = window.innerWidth / 2;
@@ -46,7 +48,7 @@ export function DevCursor() {
       cancelAnimationFrame(frame);
       document.documentElement.classList.remove("cursor-dev");
     };
-  }, []);
+  }, [enabled]);
 
   if (!enabled) return null;
 
