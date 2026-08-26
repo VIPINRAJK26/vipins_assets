@@ -1,20 +1,64 @@
 import { useState } from "react";
 import { Mail, Send } from "lucide-react";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
+import emailjs from "@emailjs/browser";
+import toast from "react-hot-toast";
 
 
 import { Reveal } from "../animation/Reveal";
 
 
 export function Contact() {
+    const [sending, setSending] = useState(false);
     const [sent, setSent] = useState(false);
+    const [error, setError] = useState<string | null>(null);
     const [form, setForm] = useState({ name: "", email: "", brief: "" });
 
-    const submit = (e: React.FormEvent) => {
+    const submit = async (e: React.FormEvent) => {
         e.preventDefault();
-        const body = encodeURIComponent(`${form.brief}\n\n— ${form.name} (${form.email})`);
-        window.location.href = `mailto:hello@nexus2050.dev?subject=New transmission&body=${body}`;
-        setSent(true);
+        setSending(true);
+        setError(null);
+
+        const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+        const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+        const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+        if (!serviceId || !templateId || !publicKey || templateId === "your_template_id_here") {
+            const msg = "Email service configuration is incomplete.";
+            setError(msg);
+            toast.error(msg);
+            setSending(false);
+            return;
+        }
+
+        try {
+            await emailjs.send(
+                serviceId,
+                templateId,
+                {
+                    name: form.name,
+                    email: form.email,
+                    reply_to: form.email,
+                    message: form.brief,
+                },
+                publicKey
+            );
+            setSent(true);
+            toast.success("Transmission successful. Channel opened.");
+            setForm({ name: "", email: "", brief: "" });
+        } catch (err: unknown) {
+            console.error("EmailJS sending error:", err);
+            let errMsg = "An unexpected error occurred while transmitting.";
+            if (err && typeof err === "object" && "text" in err) {
+                errMsg = String((err as { text: unknown }).text);
+            } else if (err instanceof Error) {
+                errMsg = err.message;
+            }
+            setError(errMsg);
+            toast.error(errMsg);
+        } finally {
+            setSending(false);
+        }
     };
 
     const field =
@@ -94,12 +138,23 @@ export function Contact() {
 
                             <button
                                 type="submit"
-                                className="clip-hud group relative mt-5 flex w-full items-center justify-center gap-2 overflow-hidden bg-primary px-6 py-4 font-mono text-xs uppercase tracking-[0.24em] text-primary-foreground"
+                                disabled={sending}
+                                className="clip-hud group relative mt-5 flex w-full items-center justify-center gap-2 overflow-hidden bg-primary px-6 py-4 font-mono text-xs uppercase tracking-[0.24em] text-primary-foreground disabled:opacity-70 disabled:cursor-not-allowed"
                             >
-                                <span className="relative z-10">{sent ? "channel opened" : "transmit brief"}</span>
+                                <span className="relative z-10">
+                                    {sending ? "transmitting..." : sent ? "channel opened" : "transmit brief"}
+                                </span>
                                 <Send className="relative z-10 h-4 w-4" />
-                                <span className="absolute inset-y-0 w-16 animate-sweep bg-primary-foreground/25 blur-md" />
+                                {!sending && !sent && (
+                                    <span className="absolute inset-y-0 w-16 animate-sweep bg-primary-foreground/25 blur-md" />
+                                )}
                             </button>
+
+                            {error && (
+                                <p className="mt-3 text-center font-mono text-xs text-destructive">
+                                    {error}
+                                </p>
+                            )}
 
                             <p className="mt-4 text-center font-mono text-[10px] text-muted-foreground">
                                 encrypted · no spam · response &lt; 24h
